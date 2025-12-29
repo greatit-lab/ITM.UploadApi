@@ -12,9 +12,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// ▼▼▼ 바로 이 코드를 추가하세요! ▼▼▼
-// 모든 IP 주소에서 8080 포트로 들어오는 요청을 받도록 설정합니다.
-builder.WebHost.UseUrls("http://*:8080");
+// ▼▼▼ [수정] 포트를 8080에서 8082로 변경했습니다. ▼▼▼
+// 모든 IP 주소에서 8082 포트로 들어오는 요청을 받도록 설정합니다.
+builder.WebHost.UseUrls("http://*:8082");
 
 var app = builder.Build();
 
@@ -25,7 +25,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// ▼▼▼ [핵심] 정적 파일 제공 설정 추가 ▼▼▼
+// [핵심] 정적 파일 제공 설정
 // 1. PDF 파일이 저장된 실제 물리적 경로를 지정합니다.
 var fileStoragePath = "D:\\object_store";
 
@@ -42,8 +42,8 @@ app.UseStaticFiles(new StaticFileOptions
     FileProvider = new PhysicalFileProvider(fileStoragePath),
     
     // 웹에서 접근할 때 사용할 URL 경로를 지정합니다.
-    // ""는 http://서버주소/ 바로 뒤의 경로와 매핑하라는 의미입니다.
-    // 예: http://.../SDWT/file.pdf -> D:\object_store\SDWT\file.pdf
+    // ""는 http://서버주소:8082/ 바로 뒤의 경로와 매핑하라는 의미입니다.
+    // 예: http://...:8082/SDWT/file.pdf -> D:\object_store\SDWT\file.pdf
     RequestPath = ""
 });
 
