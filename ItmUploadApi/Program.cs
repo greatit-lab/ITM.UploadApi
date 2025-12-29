@@ -27,7 +27,7 @@ if (app.Environment.IsDevelopment())
 
 // [핵심] 정적 파일 제공 설정
 // 1. PDF 파일이 저장된 실제 물리적 경로를 지정합니다.
-var fileStoragePath = "D:\\object_store";
+var fileStoragePath = "E:\\object_store";
 
 // 2. 서버 시작 시 해당 경로가 존재하지 않으면 자동으로 생성합니다.
 if (!Directory.Exists(fileStoragePath))
@@ -40,7 +40,7 @@ app.UseStaticFiles(new StaticFileOptions
 {
     // 실제 파일 시스템 경로를 지정
     FileProvider = new PhysicalFileProvider(fileStoragePath),
-    
+
     // 웹에서 접근할 때 사용할 URL 경로를 지정합니다.
     // ""는 http://서버주소:8082/ 바로 뒤의 경로와 매핑하라는 의미입니다.
     // 예: http://...:8082/SDWT/file.pdf -> D:\object_store\SDWT\file.pdf
