@@ -12,7 +12,7 @@ namespace ItmUploadApi.Controllers
     public class FileUploadController : ControllerBase
     {
         // 최상위 저장 경로
-        private readonly string _baseStoragePath = "D:\\object_store";
+        private readonly string _baseStoragePath = "E:\\object_store";
 
         // POST /api/FileUpload/upload
         [HttpPost("upload")]
@@ -49,7 +49,7 @@ namespace ItmUploadApi.Controllers
                 {
                     await file.CopyToAsync(stream);
                 }
-                
+
                 // 4. DB에 저장할 참조 주소 생성 (상대 경로)
                 var referenceAddress = $"/{sdwt}/{eqpid}/{dateFolder}/{uniqueFileName}";
 
@@ -60,7 +60,7 @@ namespace ItmUploadApi.Controllers
                 return StatusCode(500, $"서버 오류 발생: {ex.Message}");
             }
         }
-        
+
         // GET /api/FileUpload/download/{fileName}
         [HttpGet("download/{fileName}")]
         public IActionResult DownloadFile(string fileName)
